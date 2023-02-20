@@ -1,8 +1,8 @@
 import {User} from "../model/user";
-import {UserDb} from "../manager/user-db";
+import {UserDB} from "../manager/user-d-b";
 
-export const ADMINS: UserDb = new UserDb();
-export const USERS: UserDb = new UserDb();
+export const ADMINS: UserDB = new UserDB();
+export const USERS: UserDB = new UserDB();
 
 let admin1 = new User(ADMINS.generateNewID(),"admin", "admin");
 ADMINS.addUser(admin1);

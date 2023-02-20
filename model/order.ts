@@ -1,5 +1,5 @@
 import {Product} from "./product";
-import {StorageDB} from "../manager/storageDB";
+import {StorageDB} from "../manager/storage-d-b";
 
 export class Order {
     private readonly _orderID: string;
@@ -33,7 +33,7 @@ export class Order {
         // console.log(date.toJSON()) '2023-12-20T04:21:19.102Z'
         // console.log('DATE'+ date);
         let month = ((date.getMonth()<=8)? "0": "") + (date.getMonth()+1).toString();
-        return `${userID.toString()}#${date.getFullYear()}-${month}-${date.getDate()}${date.getHours()}${date.getMinutes()}`;
+        return `${userID.toString()}#${date.getFullYear()}${month}${date.getDate()}${date.getHours()}${date.getMinutes()}`;
     }
 
     showDetails(): void {

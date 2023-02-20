@@ -1,6 +1,6 @@
 import {User} from "../model/user";
 
-export class UserDb {
+export class UserDB {
     private DB: Array<User> = [];
 
     addUser(user: User): void {

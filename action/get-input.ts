@@ -1,12 +1,12 @@
 import {Action} from "./action";
-import {UserDb} from "../manager/user-db";
-import {StorageDB} from "../manager/storageDB";
+import {UserDB} from "../manager/user-d-b";
+import {StorageDB} from "../manager/storage-d-b";
 import {Cart} from "../model/cart";
 
 const readlineSync = require('readline-sync');
 export class GetInput {
     static wrongNameMenu: Array<string> = ["Re-type name", "Back to previous menu"];
-    static getUserNameToEdit(DB: UserDb, parentMenu: Function): string {
+    static getUserNameToEdit(DB: UserDB, parentMenu: Function): string {
         let username = readlineSync.question("Input username: ");
         while (DB.findByUsername(username) > -1) {
             let index = readlineSync.keyInSelect(GetInput.wrongNameMenu, `Existed name, what would you like to do?:`);
@@ -24,7 +24,7 @@ export class GetInput {
         }
         return username;
     }
-    static getUserNameToLogin(DB: UserDb, parentMenu: Function): string {
+    static getUserNameToLogin(DB: UserDB, parentMenu: Function): string {
         let username = readlineSync.question("Input username: ");
         while (DB.findByUsername(username) === -1) {
             Action.showNotification("NAME NOT FOUND")
@@ -44,7 +44,7 @@ export class GetInput {
         return username;
     }
 
-    static receiveUserID(DB: UserDb, parentMenu: Function):number {
+    static receiveUserID(DB: UserDB, parentMenu: Function):number {
         let wrongMenu: Array<string> = ["Re-input", "Back to previous menu"];
         DB.showDB();
         let userID:number = +(readlineSync.question("Input user ID of choice: "));

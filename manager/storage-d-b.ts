@@ -29,7 +29,7 @@ export class StorageDB extends ProductDB {
     findByNearestName(name: string): Array<Product> {
         let newList: Array<Product> = [];
         this.DB.forEach(item => {
-            if (item.name.includes(name)) {
+            if (item.name.toLowerCase().includes(name.toLowerCase())) {
                 newList.push(item)
             }
         });

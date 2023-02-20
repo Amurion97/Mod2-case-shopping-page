@@ -2,7 +2,7 @@ import {ADMINS, USERS} from "../data/user-password";
 import {AdminMenu} from "./admin/admin-menu";
 import {Action} from "../action/action";
 import {GetInput} from "../action/get-input";
-import {UserDb} from "../manager/user-db";
+import {UserDB} from "../manager/user-d-b";
 import {UserMenu} from "./user/user-menu";
 
 
@@ -29,7 +29,7 @@ export class LoginPanel {
 
     static login(role: string):void {
         let wrongPasswordMenu: Array<string> = ["Re-type password", "Back to previous menu"];
-        let DB: UserDb;
+        let DB: UserDB;
         switch (role) {
             case "admin":
                 DB = ADMINS;
