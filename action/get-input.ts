@@ -28,7 +28,7 @@ export class GetInput {
         let username = readlineSync.question("Input username: ");
         while (DB.findByUsername(username) === -1) {
             Action.showNotification("NAME NOT FOUND")
-            let index = readlineSync.keyInSelect(this.wrongNameMenu, `What would you like to do?:`);
+            let index = readlineSync.keyInSelect(GetInput.wrongNameMenu, `What would you like to do?:`);
             switch (index) {
                 case 0:
                     username = readlineSync.question("Input username: ");
@@ -86,7 +86,7 @@ export class GetInput {
     static getProductNameToEdit(DB: StorageDB, parentMenu: Function): string {
         let productName = readlineSync.question("Input product name: ");
         while (DB.findByProductName(productName) > -1) {
-            let index = readlineSync.keyInSelect(this.wrongNameMenu, `Existed name, what would you like to do?:`);
+            let index = readlineSync.keyInSelect(GetInput.wrongNameMenu, `Existed name, what would you like to do?:`);
             switch (index) {
                 case 0:
                     productName = readlineSync.question("Input product name: ");

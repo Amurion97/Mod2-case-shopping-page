@@ -10,25 +10,25 @@ export class ManageUser {
     static menu: Array<string> = ["Show Users", "Add User", "Edit User", "Remove User", "Lock user", "Unlock user", "Back to previous menu"];
     static menuNavigation(): void {
         Action.showMenuName("MANAGE USER MENU");
-        let index = readlineSync.keyInSelect(this.menu, 'What would you like to do? ');
+        let index = readlineSync.keyInSelect(ManageUser.menu, 'What would you like to do? ');
         // console.log(index);
         switch (index) {
             case 0:
                 break;
             case 1:
-                this.addUser();
+                ManageUser.addUser();
                 break;
             case 2:
-                this.editUser();
+                ManageUser.editUser();
                 break;
             case 3:
-                this.removeUser();
+                ManageUser.removeUser();
                 break;
             case 4:
-                this.lockUser();
+                ManageUser.lockUser();
                 break;
             case 5:
-                this.unlockUser();
+                ManageUser.unlockUser();
                 break;
             case 6:
                 AdminMenu.menuNavigation();

@@ -1,7 +1,9 @@
 import {DB} from "../data/DB";
+import {GetInput} from "./get-input";
 
 export class Action {
     static sayBye():void {
+        GetInput.getConfirmation()
         console.log("Bye bye!");
         DB.save();
         process.exit();

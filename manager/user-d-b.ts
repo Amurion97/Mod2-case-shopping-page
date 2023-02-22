@@ -33,9 +33,12 @@ export class UserDB {
 
     showDB(): void {
         let N = this.DB.length;
-        console.log("User ID || Username || Locked?");
+        console.log("User ID ||  Username  || Account Status");
         for (let i = 0; i < N; i++) {
-            console.log(`${this.DB[i].id} || ${this.DB[i].username} || ${(this.DB[i].isLocked) ? "LOCKED" : "OPEN ACCESS"}`);
+            let currentUser = this.DB[i];
+            let blankID = 7 - currentUser.id.toString().length;
+            let blankName = 10 - currentUser.username.length;
+            console.log(`${(" ").repeat(blankID)}${currentUser.id} || ${currentUser.username}${(" ").repeat(blankName)} || ${(currentUser.isLocked) ? "LOCKED" : "OPEN ACCESS"}`);
         }
     }
 

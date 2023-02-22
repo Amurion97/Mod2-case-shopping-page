@@ -10,19 +10,19 @@ export class ManageProduct {
     static menu: Array<string> = ["Show Products", "Add Product", "Edit Product", "Remove Product", "Back to previous menu"];
     static menuNavigation(): void {
         Action.showMenuName("MANAGE PRODUCT MENU");
-        let index = readlineSync.keyInSelect(this.menu, 'What would you like to do? ');
+        let index = readlineSync.keyInSelect(ManageProduct.menu, 'What would you like to do? ');
         // console.log(index);
         switch (index) {
             case 0:
                 break;
             case 1:
-                this.addProduct();
+                ManageProduct.addProduct();
                 break;
             case 2:
-                this.editProduct();
+                ManageProduct.editProduct();
                 break;
             case 3:
-                this.removeProduct();
+                ManageProduct.removeProduct();
                 break;
             case 4:
                 AdminMenu.menuNavigation();
