@@ -1,4 +1,4 @@
-import {ADMINS, USERS} from "../data/user-password";
+import {ADMINS, CUSTOMERS} from "../data/user-password";
 import {AdminMenu} from "./admin/admin-menu";
 import {Action} from "../action/action";
 import {GetInput} from "../action/get-input";
@@ -35,10 +35,10 @@ export class LoginPanel {
                 DB = ADMINS;
                 break;
             case "user":
-                DB = USERS;
+                DB = CUSTOMERS;
                 break;
             default:
-                DB = USERS;
+                DB = CUSTOMERS;
                 break;
         }
         let username = GetInput.getUserNameToLogin(DB, LoginPanel.menuNavigation);

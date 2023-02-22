@@ -66,4 +66,18 @@ export class UserDB {
         // }
         return this.DB[this.DB.length - 1].id + 1;
     }
+
+    toString(): string {
+        let N = this.DB.length;
+        let arr: Array<string> = [];
+        for (let i = 0; i < N; i++) {
+            let line: Array<string> = [];
+            line.push(this.DB[i].id.toString());
+            line.push(this.DB[i].username);
+            line.push(this.DB[i].password);
+            line.push((this.DB[i].isLocked) ? "true" : "false");
+            arr.push(line.join(","));
+        }
+        return arr.join("\n");
+    }
 }

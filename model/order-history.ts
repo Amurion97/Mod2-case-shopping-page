@@ -1,6 +1,6 @@
 import {Order} from "./order";
 import {Action} from "../action/action";
-import {USERS} from "../data/user-password";
+import {CUSTOMERS} from "../data/user-password";
 
 export class OrderHistory {
     private readonly _userID:number;
@@ -23,11 +23,30 @@ export class OrderHistory {
     }
 
     showAsTable(): void {
-        Action.showMenuName(`${USERS.getUserInfo(USERS.findByUserID(this._userID)).username}'S PURCHASE HISTORY`)
+        Action.showMenuName(`${CUSTOMERS.getUserInfo(CUSTOMERS.findByUserID(this._userID)).username}'S PURCHASE HISTORY`)
         // console.log("OrderID || Numbers of Products || Cost || Date");
         this.orderList.forEach( item => {
             // item.showAsRow();
             item.showDetails();
         })
+    }
+
+    toString(): string {
+        let N = this.orderList.length;
+        let arr: Array<string> = [];
+        let userID = this.userID;
+        // let line: string = .toString() + "," + N;
+        // arr.push(line);
+        for (let i = 0; i < N; i++) {
+            let currentOrder: Order = this.orderList[i];
+            let N = currentOrder.productList.length;
+            for (let j = 0; j < N; j++) {
+                let currentProduct = currentOrder.productList[j];
+                let line = `${userID},${currentOrder.orderID},${currentOrder.cost},${currentOrder.timeOfBuy},`;
+                line += `${currentProduct.id},${currentProduct.name},${currentProduct.price},${currentProduct.quantity}`;
+                arr.push(line);
+            }
+        }
+        return arr.join("\n");
     }
 }

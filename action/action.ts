@@ -1,6 +1,9 @@
+import {DB} from "../data/DB";
+
 export class Action {
     static sayBye():void {
         console.log("Bye bye!");
+        DB.save();
         process.exit();
     }
 

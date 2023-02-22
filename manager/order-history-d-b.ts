@@ -29,4 +29,13 @@ export class OrderHistoryDB {
             HISTORY.getByIndex(index).addOrder(newOrder);
         }
     }
+
+    toString(): string {
+        let N = this.DB.length;
+        let arr: Array<string> = [];
+        for (let i = 0; i < N; i++) {
+            arr.push(this.DB[i].toString());
+        }
+        return arr.join("\n");
+    }
 }

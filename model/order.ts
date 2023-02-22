@@ -5,18 +5,18 @@ export class Order {
     private readonly _orderID: string;
     private readonly _userID: number;
     private readonly _productList: Array<Product>;
-    private readonly cost: number;
-    private readonly timeOfBuy: number;
-    private readonly buyDate: string;
+    private readonly _cost: number;
+    private readonly _timeOfBuy: number;
+    private readonly _buyDate: string;
 
 
     constructor(orderID: string, userID: number, productList: Array<Product>, cost: number, timeOfBuy: number) {
         this._orderID = orderID;
         this._userID = userID;
         this._productList = productList;
-        this.cost = cost;
-        this.timeOfBuy = timeOfBuy;
-        this.buyDate = new Date(timeOfBuy).toDateString();
+        this._cost = cost;
+        this._timeOfBuy = timeOfBuy;
+        this._buyDate = new Date(timeOfBuy).toDateString();
     }
 
     get orderID(): string {
@@ -38,17 +38,39 @@ export class Order {
 
     showDetails(): void {
         console.log(`+++ OrderID: ${this._orderID}`)
-        console.log(` ++ Purchased date: ${this.buyDate}`);
+        console.log(` ++ Purchased date: ${this._buyDate}`);
         // console.log(`  + Buyer: ${USERS.getUserInfo(USERS.findByUserID(this._userID)).username}`);
         console.log("  + PURCHASED PRODUCTS: ");
         StorageDB.showAsTable(this._productList);
         console.log(`  ${("+".repeat(18))}`)
-        console.log(` ++ Money spent: ${this.cost}`);
+        console.log(` ++ Money spent: ${this._cost}`);
         console.log(`+`.repeat(20))
 
     }
 
     showAsRow(): void {
-        console.log(`${this._orderID} || ${this._productList.length} || ${this.cost} || ${this.buyDate}`)
+        console.log(`${this._orderID} || ${this._productList.length} || ${this._cost} || ${this._buyDate}`)
+    }
+
+
+    get cost(): number {
+        return this._cost;
+    }
+
+    get timeOfBuy(): number {
+        return this._timeOfBuy;
+    }
+
+    get buyDate(): string {
+        return this._buyDate;
+    }
+
+    addProduct(product: Product): void {
+        this.productList.push(product);
+    }
+
+
+    get userID(): number {
+        return this._userID;
     }
 }

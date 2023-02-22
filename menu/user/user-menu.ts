@@ -2,7 +2,7 @@
 import {Action} from "../../action/action";
 import {LoginPanel} from "../login";
 import {ShoppingMenu} from "./shopping-menu";
-import {USERS} from "../../data/user-password";
+import {CUSTOMERS} from "../../data/user-password";
 import {CartMenu} from "./cart-menu";
 import {HISTORY} from "../../data/history";
 import {CART_DB} from "../../data/user-cart";
@@ -10,11 +10,14 @@ import {Cart} from "../../model/cart";
 // import {ManageProduct} from "./manage-product";
 
 const readlineSync = require('readline-sync');
+
 export class UserMenu {
     static menu: Array<string> = ["Shopping", "My Cart", "My Purchase History", "Log out"];
-    static menuNavigation(userID: number):void {
+
+    static menuNavigation(userID: number): void {
         Action.showMenuName("CUSTOMER MENU");
-        let username = USERS.getUserInfo(USERS.findByUserID(userID)).username;
+        let userIndex: number = CUSTOMERS.findByUserID(userID);
+        let username: string = CUSTOMERS.getUserInfo(userIndex).username;
         let index = readlineSync.keyInSelect(this.menu, `Hello ${username}, what would you like to do? `);
         // console.log(index);
         switch (index) {

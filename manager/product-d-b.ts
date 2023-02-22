@@ -5,7 +5,12 @@ export class ProductDB {
     protected DB: Array<Product> = [];
 
     addProduct(product: Product): void {
-        this.DB.push(product);
+        let index = this.findByProductID(product.id);
+        if (index < 0) {
+            this.DB.push(product);
+        } else {
+            this.DB[index].quantity += product.quantity;
+        }
     }
 
     findByProductID(id: number): number {
@@ -37,7 +42,7 @@ export class ProductDB {
 
     showDB(): void {
         // let N = this.DB.length;
-        console.log("Product ID || Product name || Price || Quantity");
+        console.log("Product ID || Product name ||   Price   || Quantity");
         this.DB.forEach( item => item.showInfo())
     }
 
@@ -51,5 +56,23 @@ export class ProductDB {
         return productList.map(item => {
             return new Product(item.id, item.name, item.price, item.quantity)
         })
+    }
+
+    toString(): string {
+        let N = this.DB.length;
+        let arr: Array<string> = [];
+        for (let i = 0; i < N; i++) {
+            let line: Array<string> = []
+            line.push(this.DB[i].id.toString());
+            line.push(this.DB[i].name);
+            line.push(this.DB[i].price.toString());
+            line.push(this.DB[i].quantity.toString());
+            arr.push(line.join(","));
+        }
+        return arr.join("\n");
+    }
+
+    getNumberOfProduct(): number {
+        return this.DB.length;
     }
 }

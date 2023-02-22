@@ -20,4 +20,21 @@ export class CartDB{
     // updateCart(userID: number, cart: Cart): void {
     //
     // }
+
+    toString(): string {
+        let N = this.DB.length;
+        let arr: Array<string> = [];
+        for (let i = 0; i < N; i++) {
+            let line: Array<string> = [];
+            let currentCart = this.DB[i];
+            line.push(currentCart.userID.toString());
+            line.push(currentCart.getNumberOfProduct().toString());
+            arr.push(line.join(","));
+            if (currentCart.getNumberOfProduct()) {
+                arr.push(currentCart.toString());
+            }
+        }
+        return arr.join("\n");
+    }
+
 }
