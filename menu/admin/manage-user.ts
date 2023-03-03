@@ -45,7 +45,7 @@ export class ManageUser {
             case 4:
             case 5:
                 Action.showMenuName("USER DB");
-                CUSTOMERS.showDB();
+                CUSTOMERS.showDBAsTable();
                 Action.pause();
                 ManageUser.menuNavigation();
                 break;
@@ -57,7 +57,7 @@ export class ManageUser {
         let name: string = GetInput.getUserNameToEdit(CUSTOMERS, ManageUser.menuNavigation);
         let password = readlineSync.question("password: ");
         let userID = CUSTOMERS.generateNewID();
-        CUSTOMERS.addUser(new User(userID, name, password));
+        CUSTOMERS.addCustomer(new User(userID, name, password));
         Action.showNotification("Successfully added new user");
     }
 
@@ -66,9 +66,9 @@ export class ManageUser {
         let userID: number = GetInput.receiveUserID(CUSTOMERS, ManageUser.menuNavigation);
         let name: string = GetInput.getUserNameToEdit(CUSTOMERS, ManageUser.editUser);
         let password = readlineSync.question("password: ");
-        let index = CUSTOMERS.findByUserID(userID);
-        let newUser = new User(CUSTOMERS.getUserInfo(index).id, name, password)
-        CUSTOMERS.replaceUser(userID, newUser);
+        let index = CUSTOMERS.findIndexByUserID(userID);
+        let newUser = new User(CUSTOMERS.getCustomerByIndex(index).id, name, password)
+        CUSTOMERS.replaceCustomerInfo(userID, newUser);
         Action.showNotification(`Successfully change user ID ${userID}`);
     }
 
@@ -76,7 +76,7 @@ export class ManageUser {
         Action.showMenuName("REMOVE USER");
         let userIndex: number = GetInput.receiveUserID(CUSTOMERS, ManageUser.menuNavigation);
         if (GetInput.getConfirmation(ManageUser.removeUser)) {
-            CUSTOMERS.removeUser(userIndex);
+            CUSTOMERS.deleteCustomer(userIndex);
             Action.showNotification(`Successfully remove user ID ${userIndex}`);
         }
     }
@@ -84,7 +84,7 @@ export class ManageUser {
     static lockUser(): void {
         Action.showMenuName("LOCK USER");
         let userID: number = GetInput.receiveUserID(CUSTOMERS, ManageUser.menuNavigation);
-        if (CUSTOMERS.checkLocked(userID)) {
+        if (CUSTOMERS.checkLockedStatus(userID)) {
             Action.showNotification("User already locked");
             // ManageUser.menuNavigation();
         } else {
@@ -98,7 +98,7 @@ export class ManageUser {
     static unlockUser(): void {
         Action.showMenuName("LOCK USER");
         let userID: number = GetInput.receiveUserID(CUSTOMERS, ManageUser.menuNavigation);
-        if (!CUSTOMERS.checkLocked(userID)) {
+        if (!CUSTOMERS.checkLockedStatus(userID)) {
             Action.showNotification("User is not locked");
             // Action.pause();
             // ManageUser.menuNavigation();

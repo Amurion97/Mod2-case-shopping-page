@@ -1,5 +1,5 @@
-import {Product} from "../model/product";
-import {Order} from "../model/order";
+import {Product} from "../product";
+import {Order} from "../order";
 
 export class ProductDB {
     protected DB: Array<Product> = [];

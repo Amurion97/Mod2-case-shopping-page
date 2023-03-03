@@ -1,4 +1,4 @@
-import {Cart} from "../model/cart";
+import {Cart} from "../cart";
 
 export class CartDB{
     private DB: Array<Cart>;

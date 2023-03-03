@@ -1,6 +1,6 @@
 // import {Cart} from "../model/cart";
 // import {product1} from "./product-sample";
-import {CartDB} from "../manager/cart-d-b";
+import {CartDB} from "../model/manager/cart-d-b";
 
 // let aCart = new Cart(2);
 // aCart.addProduct(product1);

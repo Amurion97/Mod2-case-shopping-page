@@ -16,8 +16,8 @@ export class UserMenu {
 
     static menuNavigation(userID: number): void {
         Action.showMenuName("CUSTOMER MENU");
-        let userIndex: number = CUSTOMERS.findByUserID(userID);
-        let username: string = CUSTOMERS.getUserInfo(userIndex).username;
+        let userIndex: number = CUSTOMERS.findIndexByUserID(userID);
+        let username: string = CUSTOMERS.getCustomerByIndex(userIndex).username;
         let index = readlineSync.keyInSelect(this.menu, `Hello ${username}, what would you like to do? `);
         // console.log(index);
         switch (index) {

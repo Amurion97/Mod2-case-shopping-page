@@ -1,6 +1,6 @@
 import {Action} from "./action";
-import {UserDB} from "../manager/user-d-b";
-import {StorageDB} from "../manager/storage-d-b";
+import {UserDB} from "../model/manager/user-d-b";
+import {StorageDB} from "../model/manager/storage-d-b";
 import {Cart} from "../model/cart";
 
 const readlineSync = require('readline-sync');
@@ -8,7 +8,7 @@ export class GetInput {
     static wrongNameMenu: Array<string> = ["Re-type name", "Back to previous menu"];
     static getUserNameToEdit(DB: UserDB, parentMenu: Function): string {
         let username = readlineSync.question("Input username: ");
-        while (DB.findByUsername(username) > -1) {
+        while (DB.findIndexByUsername(username) > -1) {
             let index = readlineSync.keyInSelect(GetInput.wrongNameMenu, `Existed name, what would you like to do?:`);
             switch (index) {
                 case 0:
@@ -26,7 +26,7 @@ export class GetInput {
     }
     static getUserNameToLogin(DB: UserDB, parentMenu: Function): string {
         let username = readlineSync.question("Input username: ");
-        while (DB.findByUsername(username) === -1) {
+        while (DB.findIndexByUsername(username) === -1) {
             Action.showNotification("NAME NOT FOUND")
             let index = readlineSync.keyInSelect(GetInput.wrongNameMenu, `What would you like to do?:`);
             switch (index) {
@@ -46,14 +46,14 @@ export class GetInput {
 
     static receiveUserID(DB: UserDB, parentMenu: Function):number {
         let wrongMenu: Array<string> = ["Re-input", "Back to previous menu"];
-        DB.showDB();
+        DB.showDBAsTable();
         let userID:number = +(readlineSync.question("Input user ID of choice: "));
-        while (!DB.checkValidUserID(userID)) {
+        while (!DB.checkValidUserIDInput(userID)) {
             Action.showNotification("WRONG ID")
             let  index = readlineSync.keyInSelect(wrongMenu, `What would you like to do?:`);
             switch (index) {
                 case 0:
-                    DB.showDB();
+                    DB.showDBAsTable();
                     userID = +(readlineSync.question("Input user ID of choice: "));
                     break;
                 case 1:

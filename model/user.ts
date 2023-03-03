@@ -4,7 +4,7 @@ export class User {
     private _password: string;
     private _isLocked: boolean = false;
 
-    constructor(id:number, name: string, password: string) {
+    constructor(id: number, name: string, password: string) {
         this._id = id;
         this._username = name;
         this._password = password;

@@ -1,6 +1,6 @@
-import {OrderHistory} from "../model/order-history";
-import {HISTORY} from "../data/history";
-import {Order} from "../model/order";
+import {OrderHistory} from "../order-history";
+import {HISTORY} from "../../data/history";
+import {Order} from "../order";
 
 export class OrderHistoryDB {
     private DB: Array<OrderHistory>;

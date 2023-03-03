@@ -2,7 +2,7 @@ import {ADMINS, CUSTOMERS} from "../data/user-password";
 import {AdminMenu} from "./admin/admin-menu";
 import {Action} from "../action/action";
 import {GetInput} from "../action/get-input";
-import {UserDB} from "../manager/user-d-b";
+import {UserDB} from "../model/manager/user-d-b";
 import {UserMenu} from "./user/user-menu";
 
 
@@ -67,9 +67,10 @@ export class LoginPanel {
                         AdminMenu.menuNavigation();
                         break;
                     case "user":
-                        let userID = DB.getUserInfo(DB.findByUsername(username)).id;
-                        if (DB.checkLocked(userID)) {
+                        let userID = DB.getCustomerByIndex(DB.findIndexByUsername(username)).id;
+                        if (DB.checkLockedStatus(userID)) {
                             Action.showNotification("Your account is LOCKED, please contact admin");
+                            Action.pause();
                             LoginPanel.menuNavigation();
                         } else {
                             UserMenu.initCart(userID);

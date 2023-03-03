@@ -3,7 +3,7 @@ import {Action} from "../action/action";
 import {CUSTOMERS} from "../data/user-password";
 
 export class OrderHistory {
-    private readonly _userID:number;
+    private readonly _userID: number;
     private orderList: Array<Order>;
 
     constructor(userID: number) {
@@ -18,14 +18,15 @@ export class OrderHistory {
     addOrder(order: Order): void {
         this.orderList.push(order);
     }
+
     getByOrderID(id: string): Order | undefined {
         return this.orderList.find(item => item.orderID === id);
     }
 
     showAsTable(): void {
-        Action.showMenuName(`${CUSTOMERS.getUserInfo(CUSTOMERS.findByUserID(this._userID)).username}'S PURCHASE HISTORY`)
+        Action.showMenuName(`${CUSTOMERS.getCustomerByIndex(CUSTOMERS.findIndexByUserID(this._userID)).username}'S PURCHASE HISTORY`)
         // console.log("OrderID || Numbers of Products || Cost || Date");
-        this.orderList.forEach( item => {
+        this.orderList.forEach(item => {
             // item.showAsRow();
             item.showDetails();
         })

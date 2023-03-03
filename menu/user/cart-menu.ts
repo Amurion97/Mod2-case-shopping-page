@@ -4,7 +4,7 @@ import {CART_DB} from "../../data/user-cart";
 import {Order} from "../../model/order";
 import {GetInput} from "../../action/get-input";
 import {STORE} from "../../data/product-sample";
-import {ProductDB} from "../../manager/product-d-b";
+import {ProductDB} from "../../model/manager/product-d-b";
 import {HISTORY} from "../../data/history";
 
 const readlineSync = require('readline-sync');

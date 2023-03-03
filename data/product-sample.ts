@@ -1,5 +1,5 @@
 import {Product} from "../model/product";
-import {StorageDB} from "../manager/storage-d-b";
+import {StorageDB} from "../model/manager/storage-d-b";
 
 export const STORE: StorageDB = new StorageDB();
 // export let product1 = new Product(STORE.generateNewID(), "banana", 10000, 10);

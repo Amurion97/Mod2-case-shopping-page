@@ -1,5 +1,5 @@
 import {OrderHistory} from "../model/order-history";
-import {OrderHistoryDB} from "../manager/order-history-d-b";
+import {OrderHistoryDB} from "../model/manager/order-history-d-b";
 
 // export let aHistory: OrderHistory = new OrderHistory(2);
 

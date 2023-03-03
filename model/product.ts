@@ -44,10 +44,10 @@ export class Product {
     }
 
     showInfo(): void {
-        let blankID = 10-this.id.toString().length;
-        let blankName = 12-this.name.length;
-        let blankPrice = 9-this.price.toString().length;
-        let blankQuantity = 8-this.quantity.toString().length;
+        let blankID = 10 - this.id.toString().length;
+        let blankName = 12 - this.name.length;
+        let blankPrice = 9 - this.price.toString().length;
+        let blankQuantity = 8 - this.quantity.toString().length;
         console.log(`${(" ").repeat(blankID)}${this.id} || ${this.name}${(" ").repeat(blankName)} || ${(" ").repeat(blankPrice)}${this.price} || ${(" ").repeat(blankQuantity)}${this.quantity}`)
     }
 }

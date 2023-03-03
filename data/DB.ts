@@ -1,7 +1,7 @@
-import {UserDB} from "../manager/user-d-b";
-import {ProductDB} from "../manager/product-d-b";
-import {CartDB} from "../manager/cart-d-b";
-import {OrderHistoryDB} from "../manager/order-history-d-b";
+import {UserDB} from "../model/manager/user-d-b";
+import {ProductDB} from "../model/manager/product-d-b";
+import {CartDB} from "../model/manager/cart-d-b";
+import {OrderHistoryDB} from "../model/manager/order-history-d-b";
 import {User} from "../model/user";
 import {CUSTOMERS} from "./user-password";
 import {STORE} from "./product-sample";
@@ -17,7 +17,7 @@ export class DB {
     static urls = {
         // new URL("admin", "data/admin-db"),
         customer: "data/DB-file/customer-db.txt",
-        store: "data/DB-file/store-db.txt",
+        store: "data/DB-file/store-db.csv",
         cart: "data/DB-file/cart-db.txt",
         history: "data/DB-file/history-db.txt",
     };
@@ -58,7 +58,7 @@ export class DB {
         for (let i = 0; i < N; i++) {
             let line = arr[i].split(",");
             let id = +line[0];
-            CUSTOMERS.addUser(new User(id,line[1],line[2]));
+            CUSTOMERS.addCustomer(new User(id,line[1],line[2]));
             if (line[3] === "true") {
                 CUSTOMERS.setLocked(id);
             }
@@ -144,7 +144,7 @@ export class DB {
     }
 
     static writeCustomerDB(): void {
-        const content = CUSTOMERS.toString();
+        const content = CUSTOMERS.toCSVLine();
         const URL = this.urls.customer;
         try {
             fs.writeFileSync(URL, content);

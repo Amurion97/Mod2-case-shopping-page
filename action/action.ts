@@ -3,7 +3,7 @@ import {GetInput} from "./get-input";
 
 export class Action {
     static sayBye():void {
-        GetInput.getConfirmation()
+        // GetInput.getConfirmation()
         console.log("Bye bye!");
         DB.save();
         process.exit();

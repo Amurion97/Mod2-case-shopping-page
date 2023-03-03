@@ -1,4 +1,4 @@
-import {ProductDB} from "../manager/product-d-b";
+import {ProductDB} from "./manager/product-d-b";
 import {Action} from "../action/action";
 import {Product} from "./product";
 
@@ -44,7 +44,7 @@ export class Cart extends ProductDB {
         return this.DB;
     }
 
-    makeBlank():void {
+    makeBlank(): void {
         this.DB = [];
         this.totalCost = 0;
     }

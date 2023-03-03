@@ -1,5 +1,5 @@
 import {ProductDB} from "./product-d-b";
-import {Product} from "../model/product";
+import {Product} from "../product";
 
 export class StorageDB extends ProductDB {
     constructor() {
@@ -7,12 +7,12 @@ export class StorageDB extends ProductDB {
     }
 
     showAsTable(productList: Array<Product> = this.DB) {
-        console.log("Product ID || Product name || Price || Quantity");
+        console.log("Product ID || Product name ||   Price   || Quantity");
         productList.forEach(item => item.showInfo());
     }
 
     static showAsTable(productList: Array<Product>) {
-        console.log("Product ID || Product name || Price || Quantity");
+        console.log("Product ID || Product name ||   Price   || Quantity");
         productList.forEach(item => item.showInfo());
     }
 
