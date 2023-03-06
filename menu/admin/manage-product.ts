@@ -59,7 +59,7 @@ export class ManageProduct {
         Action.showMenuName("EDIT PRODUCT");
         let parentMenu = ManageProduct.menuNavigation
         let productID: number = GetInput.receiveProductID(STORE, parentMenu);
-        let chosenProduct: Product = STORE.getProductInfo(productID)
+        let chosenProduct: Product = STORE.getProductInfoByID(productID)
         let name: string = GetInput.getProductNameToEdit(STORE, parentMenu);
         let price = GetInput.getNumber("price", parentMenu);
         let quantity = GetInput.getNumber("quantity", parentMenu);

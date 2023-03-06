@@ -11,7 +11,7 @@ const readlineSync = require('readline-sync');
 export class CartMenu {
     static menu: Array<string> = ["Buy All", "Back to previous menu"];
     static menuNavigation(userID: number):void {
-        CART_DB.getCartInfo(userID).showCart();
+        CART_DB.getCartInfoByUserID(userID).showCart();
         Action.showMenuName("CART MENU");
         let index = readlineSync.keyInSelect(CartMenu.menu, `What would you like to do? `);
         // console.log(index);
@@ -31,7 +31,7 @@ export class CartMenu {
     }
     static buyAll(userID: number):void {
         GetInput.getConfirmation(CartMenu.menuNavigation, userID);
-        let currentCart = CART_DB.getCartInfo(userID);
+        let currentCart = CART_DB.getCartInfoByUserID(userID);
         let timeOfBuy = new Date().getTime();
         let orderID = Order.generateOrderID(userID, timeOfBuy)
         let newOrder: Order = new Order(orderID, userID, ProductDB.copyProductArray(currentCart.getProductList()), currentCart.totalCost, timeOfBuy);

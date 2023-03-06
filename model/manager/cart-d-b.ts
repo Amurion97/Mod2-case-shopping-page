@@ -11,12 +11,12 @@ export class CartDB{
         this.CartDB.push(cart);
     }
 
-    findByUserID(userID: number): number {
+    findIndexByUserID(userID: number): number {
         return this.CartDB.findIndex(item => item.userID === userID);
     }
 
-    getCartInfo(userID: number): Cart {
-        return this.CartDB[this.findByUserID(userID)];
+    getCartInfoByUserID(userID: number): Cart {
+        return this.CartDB[this.findIndexByUserID(userID)];
     }
 
     toString(): string {

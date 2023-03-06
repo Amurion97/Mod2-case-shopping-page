@@ -157,8 +157,8 @@ export class GetInput {
     static getProductQuantityToCart(productID: number, DB: StorageDB, cart: Cart, parentMenu: Function): number {
         let wrongMenu: Array<string> = ["Re-type quantity", "Back to previous menu"];
 
-        let quantityInStore: number = DB.getProductInfo(productID).quantity;
-        let quantityInCart: number = (cart.findByProductID(productID) >= 0) ? cart.getProductInfo(productID).quantity : 0;
+        let quantityInStore: number = DB.getProductInfoByID(productID).quantity;
+        let quantityInCart: number = (cart.findByProductID(productID) >= 0) ? cart.getProductInfoByID(productID).quantity : 0;
         if (quantityInCart > 0) {
             Action.showNotification(`ALREADY HAVE ${quantityInCart} IN CART`);
         }

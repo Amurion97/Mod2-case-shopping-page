@@ -25,7 +25,7 @@ export class ProductDB {
         return this.productList.findIndex(item => item.name === name)
     }
 
-    getProductInfo(id: number): Product {
+    getProductInfoByID(id: number): Product {
         return this.productList[this.findByProductID(id)];
     }
 
@@ -39,7 +39,7 @@ export class ProductDB {
 
     updateByOrder(order: Order): void {
         order.productList.forEach(item => {
-            let product: Product = this.getProductInfo(item.id);
+            let product: Product = this.getProductInfoByID(item.id);
             product.quantity -= item.quantity;
         })
     }

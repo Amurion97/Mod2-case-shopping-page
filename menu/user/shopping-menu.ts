@@ -71,14 +71,14 @@ export class ShoppingMenu {
         let parentMenu = ShoppingMenu.menuNavigation;
         let productID = GetInput.receiveProductID(STORE, parentMenu);
 
-        let cartIndex = CART_DB.findByUserID(userID);
+        let cartIndex = CART_DB.findIndexByUserID(userID);
         if (cartIndex < 0) {
             let newCart = new Cart(userID);
             CART_DB.addCart(newCart);
         }
 
-        let currentCart = CART_DB.getCartInfo(userID);
-        let chosenProduct = STORE.getProductInfo(productID);
+        let currentCart = CART_DB.getCartInfoByUserID(userID);
+        let chosenProduct = STORE.getProductInfoByID(productID);
         let quantity = GetInput.getProductQuantityToCart(productID, STORE, currentCart, parentMenu);
         currentCart.addProduct(new Product(productID,chosenProduct.name, chosenProduct.price, quantity));
         // CART_DB.updateCart(userID, currentCart);

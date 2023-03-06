@@ -15,6 +15,7 @@ export class UserMenu {
     static menuNavigation(userID: number): void {
         Action.showMenuName("CUSTOMER MENU");
         let userIndex: number = CUSTOMERS.findIndexByUserID(userID);
+        console.log(userID, userIndex);
         let username: string = CUSTOMERS.getCustomerByIndex(userIndex).username;
         let index = readlineSync.keyInSelect(this.menu, `Hello ${username}, what would you like to do? `);
         // console.log(index);
@@ -55,8 +56,11 @@ export class UserMenu {
     }
 
     static initCart(userID: number): void {
-        if (CART_DB.findByUserID(userID) < 0) {
+        let cartIndex = CART_DB.findIndexByUserID(userID)
+        if (cartIndex < 0) {
             CART_DB.addCart(new Cart(userID));
+        } else {
+            CART_DB.getCartInfoByUserID(userID).updateCurrentSTORE();
         }
     }
 

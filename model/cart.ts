@@ -1,6 +1,7 @@
 import {ProductDB} from "./manager/product-d-b";
 import {Action} from "../action/action";
 import {Product} from "./product";
+import {STORE} from "../data/product-sample";
 
 export class Cart extends ProductDB {
     readonly _userID: number;
@@ -47,6 +48,15 @@ export class Cart extends ProductDB {
     makeBlank(): void {
         this.productList = [];
         this.totalCost = 0;
+    }
+
+    updateCurrentSTORE() {
+        this.productList.forEach(item => {
+            let quantityInStore = STORE.getProductInfoByID(item.id).quantity;
+            if (item.quantity > quantityInStore) {
+                item.quantity = quantityInStore;
+            }
+        })
     }
 
 }
