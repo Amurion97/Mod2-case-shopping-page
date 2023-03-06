@@ -28,7 +28,9 @@ export class ManageProduct {
                 AdminMenu.menuNavigation();
                 break;
             case -1:
-                Action.sayBye();
+                if (GetInput.getConfirmation(ManageProduct.menuNavigation, "you want to exit")) {
+                    Action.sayBye();
+                }
                 break;
         }
         switch (index) {

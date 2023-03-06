@@ -6,6 +6,7 @@ import {CartMenu} from "./cart-menu";
 import {HISTORY} from "../../data/history";
 import {CART_DB} from "../../data/user-cart";
 import {Cart} from "../../model/cart";
+import {GetInput} from "../../action/get-input";
 
 const readlineSync = require('readline-sync');
 
@@ -16,7 +17,7 @@ export class UserMenu {
         Action.showMenuName("CUSTOMER MENU");
         let userIndex: number = CUSTOMERS.findIndexByUserID(userID);
         let username: string = CUSTOMERS.getCustomerByIndex(userIndex).username;
-        let index = readlineSync.keyInSelect(this.menu, `Hello ${username}, what would you like to do? `);
+        let index = readlineSync.keyInSelect(UserMenu.menu, `Hello ${username}, what would you like to do? `);
         // console.log(index);
         switch (index) {
             case 0:
@@ -32,7 +33,9 @@ export class UserMenu {
                 LoginPanel.menuNavigation();
                 break;
             case -1:
-                Action.sayBye();
+                if (GetInput.getConfirmation(UserMenu.menuNavigation, "you want to exit"), userID) {
+                    Action.sayBye();
+                }
                 break;
         }
         switch (index) {

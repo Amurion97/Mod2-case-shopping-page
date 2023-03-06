@@ -33,7 +33,9 @@ export class ShoppingMenu {
                 UserMenu.menuNavigation(userID);
                 break;
             case -1:
-                Action.sayBye();
+                if (GetInput.getConfirmation(ShoppingMenu.menuNavigation, "you want to exit"), userID) {
+                    Action.sayBye();
+                }
                 break;
         }
         switch (index) {

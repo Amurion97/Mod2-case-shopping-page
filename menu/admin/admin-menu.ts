@@ -2,6 +2,7 @@ import {ManageUsers} from "./manage-users";
 import {Action} from "../../action/action";
 import {LoginPanel} from "../login";
 import {ManageProduct} from "./manage-product";
+import {GetInput} from "../../action/get-input";
 
 const readlineSync = require('readline-sync');
 
@@ -9,7 +10,7 @@ export class AdminMenu {
     static menu: Array<string> = ["Manage User", "Manage Product", "Log out"];
     static menuNavigation():void {
         Action.showMenuName("ADMIN MENU");
-        let index = readlineSync.keyInSelect(this.menu, 'Hello admin, what would you like to do? ');
+        let index = readlineSync.keyInSelect(AdminMenu.menu, 'Hello admin, what would you like to do? ');
         // console.log(index);
         switch (index) {
             case 0:
@@ -22,7 +23,9 @@ export class AdminMenu {
                 LoginPanel.menuNavigation();
                 break;
             case -1:
-                Action.sayBye();
+                if (GetInput.getConfirmation(AdminMenu.menuNavigation, "you want to exit")) {
+                    Action.sayBye();
+                }
                 break;
         }
     }

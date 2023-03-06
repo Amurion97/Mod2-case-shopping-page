@@ -26,7 +26,9 @@ export class LoginPanel {
                 LoginPanel.register();
                 break;
             case -1:
-                Action.sayBye();
+                if (GetInput.getConfirmation(LoginPanel.menuNavigation, "you want to exit")) {
+                    Action.sayBye();
+                }
                 break;
         }
     }

@@ -18,11 +18,11 @@ export class GetInput {
     static getUsernameToChange(oldName: string, DB: UserDB, parentMenu: Function): string {
         let question = "Input username (8-20 character): ";
         let username = readlineSync.question(question).trim();
-        let regExCheck = this.regExUsername.test(username)
+        let regExCheck = GetInput.regExUsername.test(username)
         // console.log(regExCheck)
         while (!regExCheck || username == oldName || DB.findIndexByUsername(username) > -1) {
             if (!regExCheck) {
-                Action.showNotification(this.invalidUsernameMessage);
+                Action.showNotification(GetInput.invalidUsernameMessage);
             } else if (username == oldName) {
                 Action.showNotification("New username must be different from the old one")
             } else {
@@ -32,7 +32,7 @@ export class GetInput {
             switch (index) {
                 case 0:
                     username = readlineSync.question(question).trim();
-                    regExCheck = this.regExUsername.test(username);
+                    regExCheck = GetInput.regExUsername.test(username);
                     // username = GetInput.getUsernameToChange(oldName,DB,parentMenu);
                     break;
                 case 1:
@@ -50,12 +50,12 @@ export class GetInput {
     static getPasswordToChange(oldPassword: string, parentMenu: Function): string {
         let question = "Input password (8-20 character): ";
         let password = readlineSync.question(question);
-        let regExCheck = this.regExPassword.test(password)
+        let regExCheck = GetInput.regExPassword.test(password)
         // console.log(regExCheck)
         while (!regExCheck || password == oldPassword) {
             let message = "What would you like to do?:";
             if (!regExCheck) {
-                Action.showNotification(this.invalidPasswordMessage);
+                Action.showNotification(GetInput.invalidPasswordMessage);
             } else {
                 Action.showNotification("New password must be different from the old one")
             }
@@ -63,7 +63,7 @@ export class GetInput {
             switch (index) {
                 case 0:
                     password = readlineSync.question(question);
-                    regExCheck = this.regExPassword.test(password);
+                    regExCheck = GetInput.regExPassword.test(password);
                     break;
                 case 1:
                     parentMenu();
@@ -119,19 +119,19 @@ export class GetInput {
         return userID;
     }
 
-    static getConfirmation(parentMenu: Function, userID?: number): boolean {
-        let menu: Array<string> = ["YES", "NO"];
-        let answer: number = readlineSync.keyInSelect(menu, `Are you sure?:`);
-        switch (answer) {
-            case 0:
-                return true;
-            case 1:
-                parentMenu(userID);
-                break;
-            case -1:
-                Action.sayBye();
-                break;
-        }
+    static getConfirmation(parentMenu: Function,message?: string, userID?: number): boolean {
+        // let menu: Array<string> = ["YES", "NO"];
+        let answer: string = "";
+        do {
+            answer = readlineSync.question(`Are you sure ${message} [Y/N]?:`).toUpperCase();
+            switch (answer) {
+                case "Y":
+                    return true;
+                case "N":
+                    parentMenu(userID);
+                    break;
+            }
+        } while (answer != "Y" && answer != "N")
         return false;
     }
 

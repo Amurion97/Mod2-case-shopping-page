@@ -34,7 +34,9 @@ export class ManageUsers {
                 AdminMenu.menuNavigation();
                 break;
             case -1:
-                Action.sayBye();
+                if (GetInput.getConfirmation(ManageUsers.menuNavigation, "you want to exit")) {
+                    Action.sayBye();
+                }
                 break;
         }
         switch (index) {

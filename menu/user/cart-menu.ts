@@ -25,12 +25,14 @@ export class CartMenu {
                 UserMenu.menuNavigation(userID);
                 break;
             case -1:
-                Action.sayBye();
+                if (GetInput.getConfirmation(UserMenu.menuNavigation, "you want to exit", userID)) {
+                    Action.sayBye();
+                }
                 break;
         }
     }
     static buyAll(userID: number):void {
-        GetInput.getConfirmation(CartMenu.menuNavigation, userID);
+        GetInput.getConfirmation(CartMenu.menuNavigation,"", userID);
         let currentCart = CART_DB.getCartInfoByUserID(userID);
         let timeOfBuy = new Date().getTime();
         let orderID = Order.generateOrderID(userID, timeOfBuy)
