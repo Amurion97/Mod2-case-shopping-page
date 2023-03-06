@@ -18,8 +18,8 @@ export class DB {
         // new URL("admin", "data/admin-db"),
         customer: "data/DB-file/customer-db.csv",
         store: "data/DB-file/store-db.csv",
-        cart: "data/DB-file/cart-db.txt",
-        history: "data/DB-file/history-db.txt",
+        cart: "data/DB-file/cart-db.csv",
+        history: "data/DB-file/history-db.csv",
     };
     static init(): void {
         this.readCustomerDB();
@@ -99,22 +99,36 @@ export class DB {
         // console.log(content);
         let arr = content.split(/\r?\n|\r|\n/g);
         let N = arr.length;
-        let lineIndex = 0;
-        while (lineIndex < N) {
-            let userInfoLine = arr[lineIndex].split(",");
-            let userid = +userInfoLine[0];
-            let numberOfProduct = +userInfoLine[1];
-            if (numberOfProduct) {
-                let aCart = new Cart(userid);
-                for (let i = 1; i <= numberOfProduct; i++) {
-                    let line = arr[lineIndex+i].split(",");
-                    let id = +line[0];
-                    aCart.addProduct(new Product(id,line[1],+line[2],+line[3]));
-                }
-                CART_DB.addCart(aCart);
+        // let lineIndex = 0;
+
+        let line = arr[0].split(",")
+        let currentCart: Cart = new Cart(+line[0]);
+        for (let i = 0; i < N; i++) {
+            let line = arr[i].split(",")
+            if (+line[0] !== currentCart.userID) {
+                CART_DB.addCart(currentCart);
+                currentCart = new Cart(+line[0]);
             }
-            lineIndex += numberOfProduct + 1;
+            let currentProduct = new Product(+line[2],line[3],+line[4],+line[5]);
+            currentCart.addProduct(currentProduct);
         }
+        CART_DB.addCart(currentCart);
+
+        // while (lineIndex < N) {
+        //     let userInfoLine = arr[lineIndex].split(",");
+        //     let userid = +userInfoLine[0];
+        //     let numberOfProduct = +userInfoLine[1];
+        //     if (numberOfProduct) {
+        //         let aCart = new Cart(userid);
+        //         for (let i = 1; i <= numberOfProduct; i++) {
+        //             let line = arr[lineIndex+i].split(",");
+        //             let id = +line[0];
+        //             aCart.addProduct(new Product(id,line[1],+line[2],+line[3]));
+        //         }
+        //         CART_DB.addCart(aCart);
+        //     }
+        //     lineIndex += numberOfProduct + 1;
+        // }
     }
     static readHistoryDB(): void {
         let content: string = "";

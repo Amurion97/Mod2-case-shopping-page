@@ -6,7 +6,7 @@ export class StorageDB extends ProductDB {
         super();
     }
 
-    showAsTable(productList: Array<Product> = this.DB) {
+    showAsTable(productList: Array<Product> = this.productList) {
         console.log("Product ID || Product name ||   Price   || Quantity");
         productList.forEach(item => item.showInfo());
     }
@@ -17,7 +17,7 @@ export class StorageDB extends ProductDB {
     }
 
     sortByPrice(ascending: boolean = true): Array<Product> {
-        let newList = [...this.DB];
+        let newList = [...this.productList];
         if (ascending) {
             return newList.sort(function(a: Product, b: Product){return a.price - b.price});
         } else {
@@ -28,7 +28,7 @@ export class StorageDB extends ProductDB {
 
     findByNearestName(name: string): Array<Product> {
         let newList: Array<Product> = [];
-        this.DB.forEach(item => {
+        this.productList.forEach(item => {
             if (item.name.toLowerCase().includes(name.toLowerCase())) {
                 newList.push(item)
             }
@@ -37,16 +37,16 @@ export class StorageDB extends ProductDB {
     }
 
     filterByPriceRange(low: number, high: number): Array<Product> {
-        return this.DB.filter(item => (item.price >= low && item.price <= high));
+        return this.productList.filter(item => (item.price >= low && item.price <= high));
     }
     generateNewID(): number {
-        if (this.DB.length === 0) {
+        if (this.productList.length === 0) {
             return 1
         }
         // let newID = ;
         // while (this.findByProductID(newID) >= 0) {
         //     newID++;
         // }
-        return this.DB[this.DB.length - 1].id + 1;
+        return this.productList[this.productList.length - 1].id + 1;
     }
 }

@@ -1,4 +1,3 @@
-// import {ManageUser} from "./manage-user";
 import {Action} from "../../action/action";
 import {LoginPanel} from "../login";
 import {ShoppingMenu} from "./shopping-menu";
@@ -7,7 +6,6 @@ import {CartMenu} from "./cart-menu";
 import {HISTORY} from "../../data/history";
 import {CART_DB} from "../../data/user-cart";
 import {Cart} from "../../model/cart";
-// import {ManageProduct} from "./manage-product";
 
 const readlineSync = require('readline-sync');
 

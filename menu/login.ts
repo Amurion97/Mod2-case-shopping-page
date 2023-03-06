@@ -7,20 +7,21 @@ import {UserMenu} from "./user/user-menu";
 
 
 const readlineSync = require('readline-sync');
-const MENUS: Array<string> = ["Admin Login", "User Login"];
+
 
 export class LoginPanel {
+    static menu: Array<string> = ["Admin Login", "Customer Login"];
     static wrongPasswordMenu: Array<string> = ["Re-type password", "Back to previous menu"];
     static menuNavigation(): void{
         Action.showMenuName("MAIN MENU");
-        let index = readlineSync.keyInSelect(MENUS, 'Who are you?');
+        let index = readlineSync.keyInSelect(LoginPanel.menu, 'Who are you?');
         // console.log(index);
         switch (index) {
             case 0:
                 LoginPanel.login("admin");
                 break;
             case 1:
-                LoginPanel.login("user");
+                LoginPanel.login("customer");
                 break;
             case -1:
                 Action.sayBye();
@@ -29,13 +30,12 @@ export class LoginPanel {
     }
 
     static login(role: string):void {
-        // let wrongPasswordMenu: Array<string> = ["Re-type password", "Back to previous menu"];
         let DB: UserDB;
         switch (role) {
             case "admin":
                 DB = ADMINS;
                 break;
-            case "user":
+            case "customer":
                 DB = CUSTOMERS;
                 break;
             default:
@@ -51,11 +51,12 @@ export class LoginPanel {
             isPasswordCorrect = DB.checkPassword(username, password)
             if (!isPasswordCorrect) {
                 Action.showNotification("WRONG PASSWORD")
-                let index = readlineSync.keyInSelect(this.wrongPasswordMenu, `What would you like to do?:`);
+                let index = readlineSync.keyInSelect(LoginPanel.wrongPasswordMenu, `What would you like to do?:`);
                 switch (index) {
                     case 0:
                         break;
                     case 1:
+                        isPasswordCorrect = true;
                         LoginPanel.menuNavigation()
                         break;
                     case -1:
@@ -67,7 +68,7 @@ export class LoginPanel {
                     case "admin":
                         AdminMenu.menuNavigation();
                         break;
-                    case "user":
+                    case "customer":
                         let userID = DB.getCustomerByIndex(DB.findIndexByUsername(username)).id;
                         if (DB.checkLockedStatus(userID)) {
                             Action.showNotification("Your account is LOCKED, please contact admin");
@@ -79,7 +80,6 @@ export class LoginPanel {
                         }
                         break;
                 }
-                break;
             }
         } while (!isPasswordCorrect);
         // }

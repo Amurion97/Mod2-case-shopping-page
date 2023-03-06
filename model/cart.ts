@@ -22,7 +22,7 @@ export class Cart extends ProductDB {
 
     calculateTotalCost(): void {
         let total = 0;
-        this.DB.forEach(item => {
+        this.productList.forEach(item => {
             total += item.quantity * item.price;
         })
         this.totalCost = total;
@@ -35,17 +35,17 @@ export class Cart extends ProductDB {
     showCart(): void {
         Action.showMenuName("YOUR CART");
         console.log("Product ID || Product name || Price || Quantity");
-        this.DB.forEach(item => item.showInfo());
+        this.productList.forEach(item => item.showInfo());
         this.calculateTotalCost();
         console.log(`Total cost = ${this.totalCost}`);
     }
 
     getProductList(): Array<Product> {
-        return this.DB;
+        return this.productList;
     }
 
     makeBlank(): void {
-        this.DB = [];
+        this.productList = [];
         this.totalCost = 0;
     }
 
