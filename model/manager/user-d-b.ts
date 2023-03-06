@@ -1,4 +1,5 @@
 import {User} from "../user";
+import chalk = require("chalk");
 
 export class UserDB {
     private customerList: Array<User> = [];
@@ -69,12 +70,13 @@ export class UserDB {
     }
     showDBAsTable(): void {
         let N = this.customerList.length;
-        console.log("User ID ||  Username  || Account Status");
+        console.log("User ID ||       Username       || Account Status");
         for (let i = 0; i < N; i++) {
             let currentUser = this.customerList[i];
             let blankID = 7 - currentUser.id.toString().length;
             let blankName = 20 - currentUser.username.length;
-            console.log(`${(" ").repeat(blankID)}${currentUser.id} || ${currentUser.username}${(" ").repeat(blankName)} || ${(currentUser.isLocked) ? "LOCKED" : "OPEN ACCESS"}`);
+            console.log(`${(" ").repeat(blankID)}${currentUser.id} || ${currentUser.username}${(" ").repeat(blankName)}`
+                +` || ${(currentUser.isLocked) ? chalk.bgRed("LOCKED") : chalk.bgGreen("OPEN ACCESS")}`);
         }
     }
 

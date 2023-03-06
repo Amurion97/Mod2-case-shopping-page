@@ -40,7 +40,9 @@ export class GetInput {
                     parentMenu();
                     break;
                 case -1:
-                    Action.sayBye();
+                    if (GetInput.getConfirmation(parentMenu, "you want to exit")) {
+                        Action.sayBye();
+                    }
                     break;
             }
         }
@@ -69,7 +71,9 @@ export class GetInput {
                     parentMenu();
                     break;
                 case -1:
-                    Action.sayBye();
+                    if (GetInput.getConfirmation(parentMenu, "you want to exit")) {
+                        Action.sayBye();
+                    }
                     break;
             }
         }
@@ -89,7 +93,9 @@ export class GetInput {
                     parentMenu();
                     break;
                 case -1:
-                    Action.sayBye();
+                    if (GetInput.getConfirmation(parentMenu, "you want to exit")) {
+                        Action.sayBye();
+                    }
                     break;
             }
         }
@@ -112,18 +118,20 @@ export class GetInput {
                     parentMenu();
                     break;
                 case -1:
-                    Action.sayBye();
+                    if (GetInput.getConfirmation(parentMenu, "you want to exit")) {
+                        Action.sayBye();
+                    }
                     break;
             }
         }
         return userID;
     }
 
-    static getConfirmation(parentMenu: Function,message?: string, userID?: number): boolean {
+    static getConfirmation(parentMenu: Function,message: string = "", userID?: number): boolean {
         // let menu: Array<string> = ["YES", "NO"];
         let answer: string = "";
         do {
-            answer = readlineSync.question(`Are you sure ${message} [Y/N]?:`).toUpperCase();
+            answer = readlineSync.question(`Are you sure ${message} [Y/N]?: `).toUpperCase();
             switch (answer) {
                 case "Y":
                     return true;
@@ -147,7 +155,9 @@ export class GetInput {
                     parentMenu();
                     break;
                 case -1:
-                    Action.sayBye();
+                    if (GetInput.getConfirmation(parentMenu, "you want to exit")) {
+                        Action.sayBye();
+                    }
                     break;
             }
         }
@@ -178,7 +188,9 @@ export class GetInput {
                     parentMenu();
                     break;
                 case -1:
-                    Action.sayBye();
+                    if (GetInput.getConfirmation(parentMenu, "you want to exit")) {
+                        Action.sayBye();
+                    }
                     break;
             }
         }
@@ -200,7 +212,9 @@ export class GetInput {
                     parentMenu();
                     break;
                 case -1:
-                    Action.sayBye();
+                    if (GetInput.getConfirmation(parentMenu, "you want to exit")) {
+                        Action.sayBye();
+                    }
                     break;
             }
         }
@@ -223,7 +237,9 @@ export class GetInput {
                     parentMenu();
                     break;
                 case -1:
-                    Action.sayBye();
+                    if (GetInput.getConfirmation(parentMenu, "you want to exit")) {
+                        Action.sayBye();
+                    }
                     break;
             }
         }

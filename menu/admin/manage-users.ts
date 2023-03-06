@@ -3,6 +3,7 @@ import {CUSTOMERS} from "../../data/user-password";
 import {User} from "../../model/user";
 import {Action} from "../../action/action";
 import {GetInput} from "../../action/get-input";
+import chalk = require("chalk");
 
 const readlineSync = require('readline-sync');
 
@@ -79,10 +80,10 @@ export class ManageUsers {
 
     static removeUser(): void {
         Action.showMenuName("REMOVE USER");
-        let userIndex: number = GetInput.receiveUserID(CUSTOMERS, ManageUsers.menuNavigation);
-        if (GetInput.getConfirmation(ManageUsers.removeUser)) {
-            CUSTOMERS.deleteCustomer(userIndex);
-            Action.showNotification(`Successfully remove user ID ${userIndex}`);
+        let userID: number = GetInput.receiveUserID(CUSTOMERS, ManageUsers.menuNavigation);
+        if (GetInput.getConfirmation(ManageUsers.removeUser,`you want to ${chalk.red("DELETE")} user ID ${chalk.redBright(userID)}`)) {
+            CUSTOMERS.deleteCustomer(userID);
+            Action.showNotification(`Successfully remove user ID ${userID}`);
         }
     }
 
@@ -92,7 +93,7 @@ export class ManageUsers {
         if (CUSTOMERS.checkLockedStatus(userID)) {
             Action.showNotification("User already locked");
         } else {
-            if (GetInput.getConfirmation(ManageUsers.lockUser)) {
+            if (GetInput.getConfirmation(ManageUsers.lockUser,`you want to ${chalk.red("LOCK")} user ID ${chalk.redBright(userID)}`)) {
                 CUSTOMERS.setLocked(userID);
                 Action.showNotification(`Successfully lock user ID ${userID}`);
             }
@@ -105,7 +106,7 @@ export class ManageUsers {
         if (!CUSTOMERS.checkLockedStatus(userID)) {
             Action.showNotification("User is not locked");
         } else {
-            if (GetInput.getConfirmation(ManageUsers.lockUser)) {
+            if (GetInput.getConfirmation(ManageUsers.lockUser,`you want to ${chalk.red("UNLOCK")} user ID ${chalk.redBright(userID)}`)) {
                 CUSTOMERS.unlock(userID);
                 Action.showNotification(`Successfully lock user ID ${userID}`);
             }

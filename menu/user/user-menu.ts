@@ -33,7 +33,7 @@ export class UserMenu {
                 LoginPanel.menuNavigation();
                 break;
             case -1:
-                if (GetInput.getConfirmation(UserMenu.menuNavigation, "you want to exit"), userID) {
+                if (GetInput.getConfirmation(UserMenu.menuNavigation, "you want to exit", userID)) {
                     Action.sayBye();
                 }
                 break;

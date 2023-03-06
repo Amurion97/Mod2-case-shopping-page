@@ -1,5 +1,6 @@
 import {Product} from "./product";
 import {StorageDB} from "./manager/storage-d-b";
+import chalk = require("chalk");
 
 export class Order {
     private readonly _orderID: string;
@@ -38,13 +39,13 @@ export class Order {
 
     showDetails(): void {
         console.log(`+++ OrderID: ${this._orderID}`)
-        console.log(` ++ Purchased date: ${this._buyDate}`);
+        console.log(` ++ Purchased date: ${chalk.bgRgb(0, 153, 51).whiteBright(this._buyDate)}`);
         // console.log(`  + Buyer: ${USERS.getUserInfo(USERS.findByUserID(this._userID)).username}`);
         console.log("  + PURCHASED PRODUCTS: ");
         StorageDB.showAsTable(this._productList);
         console.log(`  ${("+".repeat(18))}`)
-        console.log(` ++ Money spent: ${this._cost}`);
-        console.log(`+`.repeat(20))
+        console.log(` ++ Money spent: ${chalk.bold.greenBright(this._cost)}`);
+        console.log(chalk.white(`-`.repeat(60)));
 
     }
 

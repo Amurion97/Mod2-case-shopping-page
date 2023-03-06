@@ -64,7 +64,9 @@ export class LoginPanel {
                         LoginPanel.menuNavigation()
                         break;
                     case -1:
-                        Action.sayBye();
+                        if (GetInput.getConfirmation(LoginPanel.menuNavigation, "you want to exit")) {
+                            Action.sayBye();
+                        }
                         break;
                 }
             } else {

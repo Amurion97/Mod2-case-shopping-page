@@ -33,7 +33,7 @@ export class ShoppingMenu {
                 UserMenu.menuNavigation(userID);
                 break;
             case -1:
-                if (GetInput.getConfirmation(ShoppingMenu.menuNavigation, "you want to exit"), userID) {
+                if (GetInput.getConfirmation(ShoppingMenu.menuNavigation, "you want to exit", userID)) {
                     Action.sayBye();
                 }
                 break;
