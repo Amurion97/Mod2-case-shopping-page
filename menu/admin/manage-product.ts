@@ -59,11 +59,11 @@ export class ManageProduct {
         Action.showMenuName("EDIT PRODUCT");
         let parentMenu = ManageProduct.menuNavigation
         let productID: number = GetInput.receiveProductID(STORE, parentMenu);
+        let chosenProduct: Product = STORE.getProductInfo(productID)
         let name: string = GetInput.getProductNameToEdit(STORE, parentMenu);
         let price = GetInput.getNumber("price", parentMenu);
         let quantity = GetInput.getNumber("quantity", parentMenu);
-        // let index = STORE.findByProductID(productID);
-        let newProduct = new Product(STORE.getProductInfo(productID).id, name, price, quantity)
+        let newProduct = new Product(chosenProduct.id, name, price, quantity)
         STORE.replaceProduct(productID, newProduct);
         Action.showNotification(`Successfully change product ID ${productID}`);
     }

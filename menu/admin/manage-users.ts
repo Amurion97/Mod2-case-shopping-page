@@ -89,7 +89,6 @@ export class ManageUsers {
         let userID: number = GetInput.receiveUserID(CUSTOMERS, ManageUsers.menuNavigation);
         if (CUSTOMERS.checkLockedStatus(userID)) {
             Action.showNotification("User already locked");
-            // ManageUser.menuNavigation();
         } else {
             if (GetInput.getConfirmation(ManageUsers.lockUser)) {
                 CUSTOMERS.setLocked(userID);
@@ -103,8 +102,6 @@ export class ManageUsers {
         let userID: number = GetInput.receiveUserID(CUSTOMERS, ManageUsers.menuNavigation);
         if (!CUSTOMERS.checkLockedStatus(userID)) {
             Action.showNotification("User is not locked");
-            // Action.pause();
-            // ManageUser.menuNavigation();
         } else {
             if (GetInput.getConfirmation(ManageUsers.lockUser)) {
                 CUSTOMERS.unlock(userID);

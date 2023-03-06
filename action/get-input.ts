@@ -190,7 +190,7 @@ export class GetInput {
         let question = `Input ${label}: `;
         let number = +readlineSync.question(question);
         while (isNaN(number) || number === 0) {
-            Action.showNotification("WRONG INPUT")
+            Action.showNotification("WRONG INPUT, MUST BE AN INTEGER > 0")
             let index = readlineSync.keyInSelect(wrongMenu, `What would you like to do?:`);
             switch (index) {
                 case 0:
