@@ -10,6 +10,7 @@ const readlineSync = require('readline-sync');
 const MENUS: Array<string> = ["Admin Login", "User Login"];
 
 export class LoginPanel {
+    static wrongPasswordMenu: Array<string> = ["Re-type password", "Back to previous menu"];
     static menuNavigation(): void{
         Action.showMenuName("MAIN MENU");
         let index = readlineSync.keyInSelect(MENUS, 'Who are you?');
@@ -28,7 +29,7 @@ export class LoginPanel {
     }
 
     static login(role: string):void {
-        let wrongPasswordMenu: Array<string> = ["Re-type password", "Back to previous menu"];
+        // let wrongPasswordMenu: Array<string> = ["Re-type password", "Back to previous menu"];
         let DB: UserDB;
         switch (role) {
             case "admin":
@@ -46,11 +47,11 @@ export class LoginPanel {
         let password: string;
         let isPasswordCorrect = false;
         do {
-            password = GetInput.getPassword();
+            password = GetInput.getPasswordToLogin();
             isPasswordCorrect = DB.checkPassword(username, password)
             if (!isPasswordCorrect) {
                 Action.showNotification("WRONG PASSWORD")
-                let index = readlineSync.keyInSelect(wrongPasswordMenu, `What would you like to do?:`);
+                let index = readlineSync.keyInSelect(this.wrongPasswordMenu, `What would you like to do?:`);
                 switch (index) {
                     case 0:
                         break;

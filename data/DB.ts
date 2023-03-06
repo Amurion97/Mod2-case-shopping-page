@@ -16,7 +16,7 @@ const fs = require('fs');
 export class DB {
     static urls = {
         // new URL("admin", "data/admin-db"),
-        customer: "data/DB-file/customer-db.txt",
+        customer: "data/DB-file/customer-db.csv",
         store: "data/DB-file/store-db.csv",
         cart: "data/DB-file/cart-db.txt",
         history: "data/DB-file/history-db.txt",

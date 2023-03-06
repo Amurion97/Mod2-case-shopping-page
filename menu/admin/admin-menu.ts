@@ -1,4 +1,4 @@
-import {ManageUser} from "./manage-user";
+import {ManageUsers} from "./manage-users";
 import {Action} from "../../action/action";
 import {LoginPanel} from "../login";
 import {ManageProduct} from "./manage-product";
@@ -13,7 +13,7 @@ export class AdminMenu {
         // console.log(index);
         switch (index) {
             case 0:
-                ManageUser.menuNavigation() ;
+                ManageUsers.menuNavigation() ;
                 break;
             case 1:
                 ManageProduct.menuNavigation();

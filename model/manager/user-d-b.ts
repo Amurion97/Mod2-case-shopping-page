@@ -73,7 +73,7 @@ export class UserDB {
         for (let i = 0; i < N; i++) {
             let currentUser = this.customerList[i];
             let blankID = 7 - currentUser.id.toString().length;
-            let blankName = 10 - currentUser.username.length;
+            let blankName = 20 - currentUser.username.length;
             console.log(`${(" ").repeat(blankID)}${currentUser.id} || ${currentUser.username}${(" ").repeat(blankName)} || ${(currentUser.isLocked) ? "LOCKED" : "OPEN ACCESS"}`);
         }
     }
