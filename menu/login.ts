@@ -4,13 +4,12 @@ import {Action} from "../action/action";
 import {GetInput} from "../action/get-input";
 import {UserDB} from "../model/manager/user-d-b";
 import {UserMenu} from "./user/user-menu";
-
+import {User} from "../model/user";
 
 const readlineSync = require('readline-sync');
 
-
 export class LoginPanel {
-    static menu: Array<string> = ["Admin Login", "Customer Login"];
+    static menu: Array<string> = ["Admin Login", "Customer Login", "New Customer Registry"];
     static wrongPasswordMenu: Array<string> = ["Re-type password", "Back to previous menu"];
     static menuNavigation(): void{
         Action.showMenuName("MAIN MENU");
@@ -22,6 +21,9 @@ export class LoginPanel {
                 break;
             case 1:
                 LoginPanel.login("customer");
+                break;
+            case 2:
+                LoginPanel.register();
                 break;
             case -1:
                 Action.sayBye();
@@ -85,4 +87,14 @@ export class LoginPanel {
         // }
     }
 
+    static register() {
+        Action.showMenuName("CUSTOMER REGISTRY");
+        let name: string = GetInput.getUsernameToChange("", CUSTOMERS, LoginPanel.menuNavigation);
+        let password = GetInput.getPasswordToChange("", LoginPanel.menuNavigation);
+        let userID = CUSTOMERS.generateNewID();
+        CUSTOMERS.addCustomer(new User(userID, name, password));
+        Action.showNotification("Successfully registered");
+        Action.pause();
+        LoginPanel.menuNavigation();
+    }
 }
