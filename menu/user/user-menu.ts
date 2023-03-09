@@ -15,6 +15,10 @@ export class UserMenu {
 
     static menuNavigation(userID: number): void {
         Action.showMenuName("CUSTOMER MENU");
+        if (!CUSTOMERS.checkValidUserIDInput(userID)) {
+            Action.showNotification(`something wrong happen, current user ID is ${userID}`);
+            LoginPanel.menuNavigation();
+        }
         let userIndex: number = CUSTOMERS.findIndexByUserID(userID);
         let username: string = CUSTOMERS.getCustomerByIndex(userIndex).username;
         let index = readlineSync.keyInSelect(UserMenu.menu, `Hello ${username}, what would you like to do? `);
